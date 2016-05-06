@@ -43,6 +43,4 @@ class Solution(object):
 
 if __name__ == '__main__':
     print Solution().threeSum([-1, 0, 1, 2, -1, -4])
-    my_list = [1,2,3,4,9]
-    my_list.reverse()
-    print my_list
+
