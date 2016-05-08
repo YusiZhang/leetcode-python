@@ -29,3 +29,4 @@ class BinarySearch(object):
 if __name__ == '__main__':
     print BinarySearch().binarySearch([1,2,3,4,5,6], 5)
     print BinarySearch().binarySearch([1,2,3,4,5,6,7], 5)
+    print BinarySearch().binarySearch([1,2,3,4,5,6,7], 1)
