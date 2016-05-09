@@ -24,3 +24,14 @@ class Solution(object):
             minSum = min(minSum, sum[i])
             maxSumDiff = max(maxSumDiff, sum[i] - minSum)
         return maxSumDiff if maxSumDiff >0 else max(nums)
+
+    # This is a more concise solution
+    def maxSubArray2(self, nums):
+        minSum = 0
+        sum = 0
+        maxDiff = -1 - sys.maxint
+        for i in range(len(nums)):
+            sum += nums[i]
+            maxDiff = max(maxDiff, sum - minSum)
+            minSum = min(minSum, sum)
+        return maxDiff
