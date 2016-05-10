@@ -33,5 +33,7 @@ class Solution(object):
         for i in range(len(nums)):
             sum += nums[i]
             maxDiff = max(maxDiff, sum - minSum)
+            # Don't put minSum before maxDiff line.
+            # Because you want to get maxDiff from the current sum minus the PREVIOUS minSum
             minSum = min(minSum, sum)
         return maxDiff
