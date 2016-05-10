@@ -24,7 +24,11 @@ class Solution(object):
             # 1. if nums[mid] > nums[start], then else
             # 2. if nums[mid] < nums[end], then else
             if nums[mid] > nums[end]:
+                # start to mid is sorted, and nums[end] definitely less than nums[start].
+                # so you only need to search from mid to end
                 start = mid
             else:
+                # mid to end is sorted, and mid is less than end, so at lease the mid is relatively small one.
+                # so you only need to search from start to mid
                 end = mid
         return min(nums[start], nums[end])
