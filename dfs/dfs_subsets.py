@@ -30,6 +30,7 @@ class Solution(object):
         nums.sort()
         self.result = []
         self.dfs(0,0,[],nums)
+        return self.result
 
     def dfs(self, depth, start, valueList, nums):
         self.result.append(valueList)
