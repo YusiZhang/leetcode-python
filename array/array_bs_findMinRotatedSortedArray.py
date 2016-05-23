@@ -18,7 +18,7 @@ class Solution(object):
         if nums[start] < nums[end]:
             return nums[start]
 
-        while start + 1< end:
+        while start + 1 < end:
             mid = start + (end - start) / 2
             # I should only consider if
             # 1. if nums[mid] > nums[start], then else
