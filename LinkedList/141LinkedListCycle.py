@@ -21,12 +21,11 @@ class Solution(object):
         """
         if head is None or head.next is None:
             return False
-        fast = head.next
-        slow = head
-        while fast != slow:
-            if fast is None or fast.next is None:
-                return False
-            fast = fast.next.next
-            slow = slow.next
 
-        return True
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if fast == slow:
+                return True
+        return False
