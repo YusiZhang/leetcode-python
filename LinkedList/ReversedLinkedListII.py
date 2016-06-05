@@ -29,9 +29,8 @@ class Solution(object):
         if m >= n or head is None:
             return head
 
-        dummy = ListNode(None)
-        dummy.next = head
-        head = dummy
+        pre, pre.next = self, head
+        head = pre
 
         for i in xrange(1, m):
             if head is None:
@@ -41,7 +40,7 @@ class Solution(object):
         premNode = head
         mNode = head.next
         nNode = mNode
-        postnNode = mNode.next
+        postnNode = nNode.next
 
         for i in xrange(m, n):
             if postnNode is None:
@@ -53,4 +52,4 @@ class Solution(object):
         mNode.next = postnNode
         premNode.next = nNode
 
-        return dummy.next
+        return pre.next
