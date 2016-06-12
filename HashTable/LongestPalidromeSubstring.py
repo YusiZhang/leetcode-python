@@ -15,7 +15,7 @@ class Solution(object):
         		start = i - (length-1)/2 
         		end = i + (length)/2
 
-        return s[start, end+1]
+        return s[start:end+1]
 
     def expandAroundCenters(self, s, left, right):
     	L = left
