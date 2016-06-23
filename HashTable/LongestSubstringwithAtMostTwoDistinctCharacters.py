@@ -22,7 +22,7 @@ class Solution(object):
         maxlen = 0
         left = 0
         for right, char in enumerate(s):
-        	if len(distinct == 2) and char not in distinct:
+        	if len(distinct) == 2 and char not in distinct:
         		left = min(distinct.values()) + 1
         		distinct.pop(s[left-1])
         	distinct[char] = right
