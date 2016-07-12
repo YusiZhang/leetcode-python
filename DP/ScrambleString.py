@@ -6,6 +6,7 @@ class Solution(object):
         :rtype: bool
         """
         """
+        #?????
         基本的思想就是：在S1上找到一个切割点，左边长度为i, 右边长为len - i。 有2种情况表明它们是IsScramble
         (1). S1的左边和S2的左边是IsScramble， S1的右边和S2的右边是IsScramble
         (2). S1的左边和S2的右边是IsScramble， S1的右边和S2的左边是IsScramble （实际上是交换了S1的左右子树）

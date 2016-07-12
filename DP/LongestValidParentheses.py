@@ -22,26 +22,26 @@ class Solution(object):
         return curMax
 
         def longestValidParentheses_stack(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        # stack solution
-        if not s or len(s) <= 1:
-            return 0
-        indices = []
-        indices.append(-1) # dummy node, to calculate length including the root/first "("
-        curMax = 0
-        for i in xrange(len(s)):
-            if s[i] == "(":
-                indices.append(i)
-            else: # s[i] == ")"
-                indices.pop()
-                if indices == []:
+            """
+            :type s: str
+            :rtype: int
+            """
+            # stack solution
+            if not s or len(s) <= 1:
+                return 0
+            indices = []
+            indices.append(-1) # dummy node, to calculate length including the root/first "("
+            curMax = 0
+            for i in xrange(len(s)):
+                if s[i] == "(":
                     indices.append(i)
-                else:
-                    curMax = max(curMax, i-indices[-1])
-        return curMax
+                else: # s[i] == ")"
+                    indices.pop()
+                    if indices == []:
+                        indices.append(i)
+                    else:
+                        curMax = max(curMax, i-indices[-1])
+            return curMax
 
         
 
