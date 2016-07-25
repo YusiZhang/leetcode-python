@@ -11,5 +11,5 @@ class Solution(object):
             l=len(a)
             while strs[i][:l]!=a[:l]:
                 l-=1
-            a=strs[i][:l]
+            a=strs[i][:l] # current common prefix
         return a
