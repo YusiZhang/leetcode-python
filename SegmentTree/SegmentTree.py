@@ -15,8 +15,8 @@ class SegmentTreeNode(object):
 
 
 class SegmentTree(object):
-    def __init__(self, start, end, input_list):
-        self.root = self.build(start, end, input_list)
+    # def __init__(self, start, end, input_list):
+    #     self.root = self.build(start, end, input_list)
 
     def build(self, start, end, input_list):
         if start > end:
@@ -34,7 +34,7 @@ class SegmentTree(object):
 
         return root
 
-    def querySegmentTree(self, start, end):
+    def querySegmentTree(self, root, start, end):
         """
 
         :param root:
@@ -44,10 +44,10 @@ class SegmentTree(object):
         :return:
         """
         # total overlap
-        if start == self.root.start and end == self.root.end:
-            return self.root.value
+        if start == root.start and end == root.end:
+            return root.value
 
-        mid        = (self.root.start + self.root.end) / 2
+        mid        = (root.start + root.end) / 2
         leftValue  = 0
         rightValue = 0
 
@@ -55,50 +55,57 @@ class SegmentTree(object):
         if start <= mid:
             if mid < end:
                 # partial value comes from left child section
-                leftValue = self.querySegmentTree(self.root.left, start, mid)
+                leftValue = self.querySegmentTree(root.left, start, mid)
             else:
                 # total overlap, result comes from left child section
-                leftValue = self.querySegmentTree(self.root.left, start, end)
+                leftValue = self.querySegmentTree(root.left, start, end)
 
         # partial overlap, and some fall into right child section
         if mid < end:
             if start <= mid:
                 # partial value comes from right child section
-                rightValue = self.querySegmentTree(self.root.right, mid+1, end)
+                rightValue = self.querySegmentTree(root.right, mid+1, end)
             else:
                 # total overlap, result comes from right child section
-                rightValue = self.querySegmentTree(self.root.right, start, end)
+                rightValue = self.querySegmentTree(root.right, start, end)
 
         # else: no overlap at all
         # this is for getting range sum
         return leftValue + rightValue
 
-    def modifySegmentTree(self, index, value):
+    def modifySegmentTree(self, root, index, value):
         """
         :type root: SegmentTreeNode
         :type index: int
         """
-        if self.root.start == index and self.root.end == index:
+        if root.start == index and root.end == index:
             # todo has to be add on, cannot update?
             # root.value += value
             root.value = value
             return
 
-        mid = (self.root.start + self.root.right) / 2
-        if self.root.start <= index and index <= mid:
-            self.modifySegmentTree(self.root.left, index, value)
+        mid = (root.start + root.end) / 2
+        if root.start <= index and index <= mid:
+            self.modifySegmentTree(root.left, index, value)
 
-        if mid < index and index <= self.root.end:
-            self.modifySegmentTree(self.root.right, index, value)
+        if mid < index and index <= root.end:
+            self.modifySegmentTree(root.right, index, value)
 
-        root.value = self.root.left.value + self.root.right.value
+        # this is for range sum, change it to min/max func when you need range min/max
+        root.value = root.left.value + root.right.value
         return
 
 if __name__ == '__main__':
     myList = [1,-1,2,3,0]
-    root = SegmentTree(0, 4, myList)
-    sumAll = root.querySegmentTree(0, 4)
+    segmentTree = SegmentTree()
+    root = segmentTree.build(0, 4, myList)
+    sumAll = segmentTree.querySegmentTree(root, 0, 4)
     print sumAll
+
+    print segmentTree.querySegmentTree(root, 0, 2)
+
+    segmentTree.modifySegmentTree(root, 1, 0)
+    print segmentTree.querySegmentTree(root, 0, 2)
 
 
 

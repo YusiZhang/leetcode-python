@@ -8,6 +8,7 @@ class Solution(object):
         pathlen = {0:0}
         for line in input.splitlines():# split line eliminate "\n"
             name = line.lstrip('\t') # lstrip eliminate "\t"
+            # len("\t\dir") = 4
             depth = len(line) - len(name)
             if "." in name:
                 maxlen = max(maxlen, pathlen[depth] + len(name))
