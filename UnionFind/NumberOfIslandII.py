@@ -46,6 +46,9 @@ class Union(object):
         self.sz[j] += self.sz[i]
         self.count -= 1
 
+    def find(self, p, q):
+        return self.root(p) == self.root(q)
+
 if __name__ == '__main__':
     positions = [[0,0], [0,1], [1,2], [2,1]]
     for p in map(tuple, positions):
