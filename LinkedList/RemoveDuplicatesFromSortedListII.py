@@ -18,17 +18,21 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        pre, pre.next = self, head
-        tmp = pre
-
-        while head:
-            if head.next and head.val == head.next.val:
-                head = head.next            # skip same value elements, they should not in the list
-                continue
-            if tmp.next is head:
-                tmp = tmp.next              # there is no skipping
+        if not head or not head.next:
+            return head
+        
+        dummy = ListNode(0)
+        # dummy.next points to where head originally is
+        dummy.next = head
+        head = dummy
+        
+        while head.next and head.next.next:
+            if head.next.val == head.next.next.val:
+                val = head.next.val
+                while head.next and head.next.val == val:
+                    head.next = head.next.next
             else:
-                tmp.next = head.next        # there are some elements to skip
-            head = head.next
-
-        return pre.next
+                head = head.next
+        
+        return dummy.next
+        

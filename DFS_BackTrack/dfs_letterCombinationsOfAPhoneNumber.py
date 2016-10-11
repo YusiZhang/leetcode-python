@@ -25,7 +25,6 @@ class Solution(object):
         :type digits: str
         :rtype: List[str]
         """
-
         # 先建立dict包含所有可能
         dict = {'2':['a','b','c'],
                 '3':['d','e','f'],
@@ -40,21 +39,23 @@ class Solution(object):
         # 如果 digits是“23”，构建出的candidates数组是[a,b,c,d,e,f]。此时如果后面按照普通combination处理，
         # 则会出现 "ab" "ac"这样的组合
         # 此解法在递归时同时传入count, 其代表组合余下的(除dict[digits[count]]外)combination需要从dict[digits[count+1]]中循环取得。
-
         if len(digits) == 0 or not digits:
             return []
-
+        
         self.result = []
-        self.length = len(digits)
-
+        
         self.dfs(0, "", digits, dict)
-
+        
         return self.result
-
-    def dfs(self, count, string, digits, dict):
-        if count == self.length:
+    
+    def dfs(self, depth, string, digits, dict):
+        if depth == len(digits):
             self.result.append(string)
             return
-        for letter in dict[digits[count]]:
-            # count + 1 !!!
-            self.dfs(count + 1, string + letter, digits, dict)
+        # dict[digits[depth]]!!!!
+        for letter in dict[digits[depth]]:
+            # depth + 1 !!!
+            self.dfs(depth+1, string+letter, digits, dict)
+            
+    
+    

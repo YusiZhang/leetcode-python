@@ -26,15 +26,23 @@ class Solution(object):
         :type n: int
         :rtype: ListNode
         """
-        result = ListNode(0)
-        result.next = head
-        tmp = result
+        if n <= 0:
+            return None
+        dummy = ListNode(0)
+        dummy.next = head
+        
+        preDelete = dummy
         for i in range(n):
+            if not head:
+                return None
             head = head.next
         while head:
             head = head.next
-            tmp = tmp.next
+            preDelete = preDelete.next
+        
+        preDelete.next = preDelete.next.next
+        
+        return dummy.next
 
-        tmp.next = tmp.next.next
 
-        return result.next
+        

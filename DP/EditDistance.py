@@ -5,17 +5,28 @@ class Solution(object):
         :type word2: str
         :rtype: int
         """
-
-        m=len(word1)+1; n=len(word2)+1
-        dp = [[0 for i in range(n)] for j in range(m)]
-        for i in range(n):
-            dp[0][i]=i
-        for i in range(m):
-            dp[i][0]=i
-        for i in range(1,m):
-            for j in range(1,n):
-                dp[i][j]=min(dp[i-1][j]+1, dp[i][j-1]+1, dp[i-1][j-1]+(0 if word1[i-1]==word2[j-1] else 1))
-        return dp[m-1][n-1]
+        if not word1 and not word2:
+            return 0
+        if not word1:
+            return len(word2)
+        if not word2:
+            return len(word1)
+        # state
+        f = [[0 for _ in range(len(word2)+1)] for _ in range(len(word1) + 1)]
+        # init
+        f[0][0] = 0
+        for i in range(1, len(word1)+1):
+            f[i][0] = f[i-1][0] + 1
+        for j in range(1, len(word2)+1):
+            f[0][j] = f[0][j-1] + 1
+        
+        # func
+        for i in range(1, len(word1)+1):
+            for j in range(1, len(word2)+1):
+                f[i][j] = min(f[i][j-1]+1, f[i-1][j]+1, f[i-1][j-1] + (0 if word1[i-1] == word2[j-1] else 1))
+            
+        # result
+        return f[len(word1)][len(word2)]
 
         """
         解题思路：这道题是很有名的编辑距离问题。用动态规划来解决。
@@ -28,3 +39,29 @@ class Solution(object):
         所以dp[i][j]=dp[i-1][j-1]+1，以上就是状态转移方程的推导。
         """
         
+"""
+class Solution: 
+    def minDistance(self, word1, word2):
+        if not word1 and not word2:
+            return 0
+        if not word1:
+            return len(word2)
+        if not word2:
+            return len(word1)
+        # state
+        f = [[0 for _ in range(len(word2)+1)] for _ in range(len(word1) + 1)]
+        # init
+        f[0][0] = 0
+        for i in range(1, len(word1)+1):
+            f[i][0] = f[i-1][0] + 1
+        for j in range(1, len(word2)+1):
+            f[0][j] = f[0][j-1] + 1
+        
+        # func
+        for i in range(1, len(word1)+1):
+            for j in range(1, len(word2)+1):
+                f[i][j] = min(f[i][j-1]+1, f[i-1][j]+1, f[i-1][j-1] + (0 if word1[i-1] == word2[j-1] else 1))
+            
+        # result
+        return f[len(word1)][len(word2)]
+"""

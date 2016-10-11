@@ -17,20 +17,21 @@ class Solution(object):
         """
         dummy = ListNode(None)
         lastNode = dummy
-
-        while l1 is not None and l2 is not None:
+        
+        while l1 and l2:
             if l1.val < l2.val:
+                #! not lastNode = l1
                 lastNode.next = l1
                 l1 = l1.next
             else:
                 lastNode.next = l2
                 l2 = l2.next
             lastNode = lastNode.next
-
+        
         if l1 is not None:
             lastNode.next = l1
-
         if l2 is not None:
             lastNode.next = l2
-
+            
         return dummy.next
+            

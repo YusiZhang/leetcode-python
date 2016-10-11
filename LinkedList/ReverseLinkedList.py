@@ -18,23 +18,23 @@ class Solution(object):
         #     head = tmp
         # #!! head is current the next to new_head
         # return new_head
-        prev = None
-        count = 1
-        while head:
-            # print "head.next: " + str(head.a
-            # head.next, head, prev = prev, head.next, head
-            print count
-            head, prev, head.next = head.next, head, prev
-            count += 1
+        # prev = None
+        # count = 1
+        # while head:
+        #     # print "head.next: " + str(head.a
+        #     # head.next, head, prev = prev, head.next, head
+        #     print count
+        #     head, prev, head.next = head.next, head, prev
+        #     count += 1
 
-            # print "head: " + str(head.val)
-            # print "prev: " + str(prev.val)
-            # # print "head.next: " + str(head.next.val)
-            # if head.next is None:
-            #     print "head.next is none"
-            #     continue
-            # else:
-            #     print "head.next: " + str(head.next.val)
+        # return prev
+        prev = None
+        
+        while head:
+            next = head.next
+            head.next = prev
+            prev = head
+            head = next
         return prev
 
 if __name__ == '__main__':

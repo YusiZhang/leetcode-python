@@ -26,30 +26,46 @@ class Solution(object):
         :type n: int
         :rtype: ListNode
         """
-        if m >= n or head is None:
+        # Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def reverseBetween(self, head, m, n):
+        """
+        :type head: ListNode
+        :type m: int
+        :type n: int
+        :rtype: ListNode
+        """
+        if m >= n or not head:
             return head
-
-        pre, pre.next = self, head
-        head = pre
-
-        for i in xrange(1, m):
-            if head is None:
+        dummy = ListNode(0)
+        dummy.next = head
+        head = dummy
+        
+        for i in range(1, m):
+            if not head:
                 return None
             head = head.next
-
+            #head is pointing to one node before m pos
         premNode = head
         mNode = head.next
         nNode = mNode
-        postnNode = nNode.next
-
-        for i in xrange(m, n):
-            if postnNode is None:
+        postnNode = mNode.next
+        
+        for i in range(m, n):
+            if not postnNode:
                 return None
-            tmp = postnNode.next
+            next = postnNode.next
             postnNode.next = nNode
             nNode = postnNode
-            postnNode = tmp
+            postnNode = next
         mNode.next = postnNode
         premNode.next = nNode
+        
+        return dummy.next
 
-        return pre.next
+        

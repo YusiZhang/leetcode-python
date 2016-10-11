@@ -37,4 +37,5 @@ class Solution(object):
         if depth == len(nums):
             return
         for i in range(start, len(nums)):
+          # note: i+1!!
             self.dfs(depth+1, i+1, valueList + [nums[i]], nums)
